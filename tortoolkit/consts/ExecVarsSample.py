@@ -1,27 +1,26 @@
-try:
-    from .ExecVars import ExecVars
-except:
+import os
+
     class ExecVars:
         # Set true if its VPS
         IS_VPS = False
         
-        API_HASH = ""
-        API_ID = 0
-        BOT_TOKEN = ""
-        BASE_URL_OF_BOT = ""
+        API_HASH = str(os.environ.get("API_HASH", None))
+        API_ID = int(os.environ.get("API_ID", None))
+        BOT_TOKEN = str(os.environ.get("BOT_TOKEN", None))
+        BASE_URL_OF_BOT = os.environ.get("BASE_URL", False)
 
         # Edit the server port if you want to keep it default though.
-        SERVPORT = 80
+        SERVPORT = os.environ.get("SERVPORT", 80)
 
         # ALLOWED USERS [ids of user or supergroup] seperate by commas
-        ALD_USR = []
+        ALD_USR = f"[{os.environ.get("ALD_USR", None)}]"
         OWNER_ID = 0
         
         # Google Drive Index Link should include the base dir also See readme for more info
-        GD_INDEX_URL = False
+        GD_INDEX_URL = bool(os.environ.get("GD_INDEX_URL", False))
 
         # Time to wait before edit message
-        EDIT_SLEEP_SECS = 40
+        EDIT_SLEEP_SECS = int(os.environ.get("EDIT_SLEEP_SECS", False))
 
         # Telegram Upload Limit (in bytes)
         TG_UP_LIMIT = 1700000000
@@ -36,7 +35,7 @@ except:
         REMAINING_STR = "▱"
 
         # DB URI for access
-        DB_URI = "dbname=tortk user=postgres password=your-pass host=127.0.0.1 port=5432"
+        DB_URI = os.environ.get("DATABASE_URL")
         
         # UNCOMMENT THE BELOW LINE WHEN USING CONTAINER AND COMMENT THE UPPER LINE
         #DB_URI = "dbname=tortk user=postgres password=your-pass host=db port=5432"
