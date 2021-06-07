@@ -331,4 +331,5 @@ async def start_server_async(port = 8080):
     runner = web.AppRunner(app)
     await runner.setup()
     #todo provide the config for the host and port for vps only
+    port = int(os.environ.get("PORT",8080))
     await web.TCPSite(runner,"0.0.0.0",port).start()
